@@ -1,0 +1,41 @@
+function add(){
+var sum=0;
+//console.dir(function name)
+for(i=0;i<arguments.length;i++)
+{
+while(typeof arguments[i]=='function')
+{
+	arguments[i]=arguments[i]();
+	//sum+=isNaN(parseInt(arguments[i]))?0:parseInt(arguments[i]);
+}
+	if(arguments[i] instanceof Array)
+    {
+		for(j=0;j<arguments[i].length;j++)
+		{
+			sum+=isNaN(parseInt(arguments[i][j]))?0:parseInt(arguments[i][j]);
+		}
+	}
+	else
+	{
+		sum+=isNaN(parseInt(arguments[i]))?0:parseInt(arguments[i]);
+    }
+}
+	return sum;
+}
+undefined
+add(1,2);
+3
+add(1,2,"ten","100",[1,2,3]);
+109
+function add1(){return 20;}
+undefined
+add(1,2,"ten","100",[1,2,3],add1);
+129
+function add1(){return [20,30];}
+undefined
+add(1,2,"ten","100",[1,2,3],add1);
+159
+function add2(){return add1;}
+undefined
+add(1,2,"ten","100",[1,2,3],add2);
+159
